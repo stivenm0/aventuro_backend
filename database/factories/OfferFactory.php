@@ -17,7 +17,9 @@ class OfferFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'discount' => fake()->randomFloat(2, 1, 100),
+            'start_date' => fake()->date(),
+            'end_date' => fake()->date(),
         ];
     }
 }

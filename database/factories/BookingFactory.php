@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Package;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,11 @@ class BookingFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => User::inRandomOrder()->pluck('id')->first(),
+            'package_id' => Package::inRandomOrder()->pluck('id')->first(),
+            'travel_date' => fake()->date(),
+            'quantity' => fake()->numberBetween(1, 30),
+            'total' => fake()->randomFloat(2, 1000, 1000)
         ];
     }
 }

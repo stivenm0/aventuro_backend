@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->softDeletes();
+            $table->softDeletes('deleted_at');
             $table->rememberToken();
             $table->timestamps();
         });
