@@ -38,19 +38,10 @@ final class MoonShineLayout implements MoonShineLayoutContract
                 Footer::make()
                     ->copyright(fn(): string => sprintf(
                         <<<'HTML'
-                            &copy; 2021-%d Made with ❤️ by
-                            <a href="https://cutcode.dev"
-                                class="font-semibold text-primary hover:text-secondary"
-                                target="_blank"
-                            >
-                                CutCode
-                            </a>
+                            &copy; Aventuro
                         HTML,
                         now()->year
                     ))
-                    ->menu([
-                        'https://moonshine-laravel.com/docs' => 'Documentation',
-                    ]),
             ])->customAttributes(['class' => 'layout-page']),
         ]);
     }

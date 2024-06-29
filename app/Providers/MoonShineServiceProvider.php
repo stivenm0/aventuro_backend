@@ -4,12 +4,20 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\MoonShine\Controllers\ExamController;
+use App\MoonShine\Pages\exam;
+use App\MoonShine\Resources\BookingResource;
+use App\MoonShine\Resources\CategoryResource;
+use App\MoonShine\Resources\ItemResource;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\MoonShine;
 use MoonShine\Menu\MenuGroup;
 use MoonShine\Menu\MenuItem;
-use MoonShine\Resources\MoonShineUserResource;
-use MoonShine\Resources\MoonShineUserRoleResource;
+use App\MoonShine\Resources\MoonShineUserResource;
+use App\MoonShine\Resources\MoonShineUserRoleResource;
+use App\MoonShine\Resources\OfferResource;
+use App\MoonShine\Resources\PackageResource;
+use App\MoonShine\Resources\UserResource;
 use MoonShine\Contracts\Resources\ResourceContract;
 use MoonShine\Menu\MenuElement;
 use MoonShine\Pages\Page;
@@ -22,7 +30,9 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
      */
     protected function resources(): array
     {
-        return [];
+        return [
+            new ItemResource()
+        ];
     }
 
     /**
@@ -48,11 +58,28 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                     static fn() => __('moonshine::ui.resource.role_title'),
                     new MoonShineUserRoleResource()
                 ),
-            ]),
+            ])->icon('heroicons.adjustments-vertical'),
 
-            MenuItem::make('Documentation', 'https://moonshine-laravel.com/docs')
-                ->badge(fn() => 'Check')
-                ->blank(),
+            MenuItem::make('Users', new UserResource())
+            ->icon('heroicons.outline.user-group'),
+
+            MenuGroup::make('Travels', [
+                MenuItem::make('Categories', new CategoryResource())
+                ->icon('heroicons.outline.tag'),
+
+                MenuItem::make('Packages', new PackageResource())
+                ->icon('heroicons.outline.bars-4'),
+
+                MenuItem::make('Offers', new OfferResource())
+                ->icon('heroicons.outline.ticket'),
+
+                MenuItem::make('Bookings', new BookingResource())
+                ->icon('heroicons.outline.banknotes'),
+
+            ])->icon('heroicons.outline.paper-airplane'),
+         
+            // MenuItem::make('Bookgs', new examm)
+            // ->icon('heroicons.outline.banknotes'),
         ];
     }
 
@@ -61,6 +88,11 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
      */
     protected function theme(): array
     {
-        return [];
+        return [
+            'colors' => [
+                'primary' => '#004080',
+                'secondary' => '#FFA500'
+            ], 
+        ];
     }
 }
