@@ -22,6 +22,7 @@ use MoonShine\Contracts\Resources\ResourceContract;
 use MoonShine\Menu\MenuElement;
 use MoonShine\Pages\Page;
 use Closure;
+use Illuminate\Http\Request;
 
 class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 {
@@ -58,14 +59,21 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                     static fn() => __('moonshine::ui.resource.role_title'),
                     new MoonShineUserRoleResource()
                 ),
-            ])->icon('heroicons.adjustments-vertical'),
+            ])->icon('heroicons.adjustments-vertical')
+            ->canSee(function(Request $request) {
+                return $request->user('moonshine')?->id === 1;
+            }) ,
 
             MenuItem::make('Users', new UserResource())
             ->icon('heroicons.outline.user-group'),
 
             MenuGroup::make('Travels', [
                 MenuItem::make('Categories', new CategoryResource())
-                ->icon('heroicons.outline.tag'),
+                ->icon('heroicons.outline.tag')
+                ->canSee(function(Request $request) {
+                    return $request->user('moonshine')?->id != 3;
+                }) 
+                ,
 
                 MenuItem::make('Packages', new PackageResource())
                 ->icon('heroicons.outline.bars-4'),
@@ -77,9 +85,6 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                 ->icon('heroicons.outline.banknotes'),
 
             ])->icon('heroicons.outline.paper-airplane'),
-         
-            // MenuItem::make('Bookgs', new examm)
-            // ->icon('heroicons.outline.banknotes'),
         ];
     }
 

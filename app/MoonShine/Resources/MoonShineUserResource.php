@@ -31,6 +31,8 @@ class MoonShineUserResource extends ModelResource
 
     public array $with = ['moonshineUserRole'];
 
+    protected bool $withPolicy = true;
+
     public function title(): string
     {
         return __('moonshine::ui.resource.admins_title');
@@ -38,6 +40,8 @@ class MoonShineUserResource extends ModelResource
 
     public function fields(): array
     {
+        // dd(moonshineRequest()->user()->isSuperUser());
+
         return [
             Block::make([
                 Tabs::make([

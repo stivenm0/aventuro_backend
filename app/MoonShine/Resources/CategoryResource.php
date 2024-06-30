@@ -29,13 +29,15 @@ class CategoryResource extends ModelResource
 
     public string $column = 'name'; 
 
+    protected bool $withPolicy = true;
+
 
     /**
      * @return list<MoonShineComponent|Field>
      */
     public function fields(): array
     {
-        return [
+            return [
             Block::make([
                 ID::make()->sortable(),
                 Text::make('Name'),

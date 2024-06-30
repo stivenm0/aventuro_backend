@@ -24,6 +24,8 @@ class MoonShineUserRoleResource extends ModelResource
 
     protected bool $editInModal = true;
 
+    protected bool $withPolicy = true;
+
     public function title(): string
     {
         return __('moonshine::ui.resource.role');
