@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Policies\MoonshineUserPolicy;
 use App\Policies\MoonshineUserRolePolicy;
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use MoonShine\Models\MoonshineUser;
@@ -32,5 +33,7 @@ class AppServiceProvider extends ServiceProvider
         
         Gate::policy(MoonshineUser::class, MoonshineUserPolicy::class);
         Gate::policy(MoonshineUserRole::class, MoonshineUserRolePolicy::class);
+
+        JsonResource::wrap('list');
     }
 }
