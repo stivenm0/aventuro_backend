@@ -3,22 +3,17 @@
 namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\V1\BookingResource;
-use App\Models\Booking;
+use App\Http\Requests\V1\UserUpdateRequest;
 use Illuminate\Http\Request;
 
-class BookingController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $bookings = $request->user()->bookings()
-        ->with('package:id,title,slug')
-        ->orderBy('id', 'desc')->paginate(10);
-
-        return BookingResource::collection($bookings);
+        return $request->user();
     }
 
     /**
@@ -40,9 +35,9 @@ class BookingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserUpdateRequest $request)
     {
-        //
+        $request->user()->update($request->all());
     }
 
     /**
