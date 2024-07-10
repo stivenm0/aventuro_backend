@@ -16,8 +16,12 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('package_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->date('travel_date');
+            $table->string('email');
+            $table->string('phone', 20);
+            $table->string('address');
             $table->integer('quantity');
             $table->decimal('total', 10,2);
+            $table->enum('status', ['Pending', 'Payed', 'Cancelled'])->default('Pending');
             $table->timestamps();
         });
     }

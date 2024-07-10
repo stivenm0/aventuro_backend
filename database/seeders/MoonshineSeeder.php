@@ -15,7 +15,7 @@ class MoonshineSeeder extends Seeder
     public function run(): void
     {
         DB::table('moonshine_user_roles')->insert([
-            [ 'name' => 'Admin' ],
+            // [ 'name' => 'Admin' ],
             [ 'name' => 'Support Agent' ],
             [ 'name' => 'Content Manager' ],
         ]);

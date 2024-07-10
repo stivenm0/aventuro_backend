@@ -16,7 +16,17 @@ class Booking extends Model
         'travel_date',
         'quantity',
         'total',
+        'phone',
+        'email',
+        'address',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'total' => 'integer',
+        ];
+    }
 
     public function user() : BelongsTo {
         return $this->belongsTo(User::class);

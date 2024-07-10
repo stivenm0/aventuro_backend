@@ -16,10 +16,20 @@ class OfferFactory extends Factory
      */
     public function definition(): array
     {
+
+        $startDate = now();
+        $endDate = now()->addMonth();
+
+        // Generar fecha de inicio dentro del rango
+        $fechaInicio = fake()->dateTimeBetween($startDate, $endDate);
+
+        // Generar fecha de fin posterior a la fecha de inicio
+        $fechaFin = fake()->dateTimeBetween($fechaInicio, $fechaInicio->format('Y-m-d H:i:s').' +10 days');
+
         return [
-            'discount' => fake()->randomFloat(2, 1, 100),
-            'start_date' => fake()->date(),
-            'end_date' => fake()->date(),
+            'discount' => random_int(5, 80),
+            'start_date' => $fechaInicio,
+            'end_date' => $fechaFin,
         ];
     }
 }

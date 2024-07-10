@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\V1\BookingStoreRequest;
 use App\Http\Resources\V1\BookingResource;
 use App\Models\Booking;
+use App\Models\Package;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -24,9 +26,20 @@ class BookingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BookingStoreRequest $request)
     {
-        //
+        $package = Package::find($request['package_id']);
+        $request->user()->bookings()->create([
+            'package_id'=> $package->id,
+            'travel_date'=> $request['travel_date'],
+            'email'=> $request['email'],
+            'phone'=> $request['phone'],
+            'address'=> $request['address'],
+            'quantity'=> $request['quantity'],
+            'total'=> $package->price * $request['quantity']
+        ]);
+
+        return response()->json(status: 201);
     }
 
     /**

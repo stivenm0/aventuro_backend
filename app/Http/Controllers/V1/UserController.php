@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        return $request->user();
+        
     }
 
     /**
@@ -27,9 +27,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        //
+        return $request->user();
     }
 
     /**

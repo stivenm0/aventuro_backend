@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('package_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->decimal('discount', 10, 2);
+            $table->tinyInteger('discount')->max(100)->min(5);
             $table->date('start_date');
             $table->date('end_date');
             $table->timestamps();

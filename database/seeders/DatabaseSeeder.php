@@ -17,21 +17,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(10)->create();
 
         // User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
 
-        // $this->call(CategorySeeder::class);
-        // $this->call(MoonshineSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(MoonshineSeeder::class);
 
-        // Package::factory(10)
-        // ->has(Item::factory()->count(5))
-        // ->has(Offer::factory()->count(1))
-        // ->create();
+        Package::factory(10)
+        ->has(Item::factory()->count(5))
+        ->has(Offer::factory()->count(1))
+        ->create();
 
-        // Booking::factory(10)->create();
+        Booking::factory(10)->create();
     }
 }

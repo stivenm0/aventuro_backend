@@ -23,6 +23,13 @@ class Package extends Model
         'duration',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'price' => 'integer',
+        ];
+    }
+
 
     public function items() : HasMany {
         return $this->hasMany(Item::class);

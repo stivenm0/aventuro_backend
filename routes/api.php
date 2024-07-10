@@ -13,18 +13,18 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 
 
-Route::apiResource('/category', CategoryController::class)->only('index');
+Route::apiResource('/categories', CategoryController::class)->only('index');
 
-Route::apiResource('/package', PackageController::class)->only('index', 'show');
+Route::apiResource('/packages', PackageController::class)->only('index', 'show');
 
-Route::apiResource('/booking', BookingController::class)->only('index', 'store')
+Route::apiResource('/bookings', BookingController::class)->only('index', 'store')
                   ->middleware('auth:sanctum');
 
-Route::apiResource('/user', UserController::class)->only('index')
+Route::get('/users', [UserController::class, 'show'])
                    ->middleware('auth:sanctum');
 
 
-Route::match(['put', 'patch'],'/user', [UserController::class, 'update'])
+Route::match(['put', 'patch'],'/users', [UserController::class, 'update'])
             ->middleware('auth:sanctum');
 
                 
