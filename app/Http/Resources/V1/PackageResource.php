@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\V1;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -14,6 +15,14 @@ class PackageResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $offer = $this->offer;
+        $start = Carbon::parse($this->offer->start_date);
+        $end = Carbon::parse($this->offer->start_end);
+
+        if(now()->between($start, $end)){
+            $priced = $this->price - (($offer->discount * $this->price) / 100);
+        }
+
         return [
             'id' => $this->id,
             'category' => $this->category->name,
@@ -24,12 +33,11 @@ class PackageResource extends JsonResource
             'items' => $this->whenLoaded('items', fn()=> $this->items),
             'offer' => $this->whenLoaded('offer', fn ()=> [
                 'discount' => $this->offer->discount,
-                'start_date' => $this->offer->start_date,
-                'end_date' => $this->offer->end_date,
             ]),
             'destination' => $this->destination,
             'duration' => $this->duration,
-            'price'=> $this->price
+            'price'=> $this->price,
+            'priced'=> $priced
         ];
     }
 

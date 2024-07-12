@@ -16,15 +16,12 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
-
-        $user = $request->user();
-
-        $user->tokens()->delete();
-
+        if (! $token = auth()->attempt($request->only(['email', 'password']))) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
         return response()->json([
-            'user' => $user,
-            'token' => $user->createToken('api-token')->plainTextToken,
+            'user' => auth()->user(),
+            'token' => $token,
         ]);
     }
 
@@ -33,8 +30,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): JsonResponse
     {
-        $request->user()->tokens()->delete();
-
+        auth()->logout();
+        
         return response()->json(status: 200);
     }
 }

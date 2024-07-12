@@ -18,7 +18,7 @@ class BookingController extends Controller
     {
         $bookings = $request->user()->bookings()
         ->with('package:id,title,slug')
-        ->orderBy('id', 'desc')->paginate(10);
+        ->orderBy('id', 'desc')->paginate(2);
 
         return BookingResource::collection($bookings);
     }

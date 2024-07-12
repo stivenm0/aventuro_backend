@@ -20,7 +20,7 @@ class PackageController extends Controller
 
          $packages =Package::with(['offer', 'category'])
         ->where($queryItems)
-        ->paginate(5)
+        ->paginate(2)
         ->appends($request->query());
         
         return PackageResource::collection($packages);
@@ -41,7 +41,7 @@ class PackageController extends Controller
     {
         $package = Package::with('category', 'items', 'offer')
         ->where('slug', $slug)->firstOrFail();
-     
+        
         return response()->json([
             'package' => new PackageResource($package)
         ]);
