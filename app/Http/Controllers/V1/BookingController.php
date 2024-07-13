@@ -36,7 +36,9 @@ class BookingController extends Controller
             'phone'=> $request['phone'],
             'address'=> $request['address'],
             'quantity'=> $request['quantity'],
-            'total'=> $package->price * $request['quantity']
+            'total'=> $package->priced() ? 
+            $package->priced() * $request['quantity'] : 
+            $package->price * $request['quantity'] 
         ]);
 
         return response()->json(status: 201);

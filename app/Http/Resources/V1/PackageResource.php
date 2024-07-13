@@ -15,13 +15,8 @@ class PackageResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $offer = $this->offer;
-        $start = Carbon::parse($this->offer->start_date);
-        $end = Carbon::parse($this->offer->start_end);
-
-        if(now()->between($start, $end)){
-            $priced = $this->price - (($offer->discount * $this->price) / 100);
-        }
+       
+        
 
         return [
             'id' => $this->id,
@@ -37,7 +32,7 @@ class PackageResource extends JsonResource
             'destination' => $this->destination,
             'duration' => $this->duration,
             'price'=> $this->price,
-            'priced'=> $priced
+            'priced'=> $this->priced()
         ];
     }
 
