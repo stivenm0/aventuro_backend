@@ -17,7 +17,6 @@ class Booking extends Model
         'quantity',
         'total',
         'phone',
-        'email',
         'address',
     ];
 

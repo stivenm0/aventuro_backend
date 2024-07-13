@@ -25,7 +25,6 @@ class BookingFactory extends Factory
             'travel_date' => now()->addMonth(),
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
-            'email' => fake()->email(),
             'quantity' => fake()->numberBetween(1, 30),
             'total' => fake()->randomFloat(2, 1000, 1000)
         ];

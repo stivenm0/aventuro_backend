@@ -32,7 +32,6 @@ class BookingController extends Controller
         $request->user()->bookings()->create([
             'package_id'=> $package->id,
             'travel_date'=> $request['travel_date'],
-            'email'=> $request['email'],
             'phone'=> $request['phone'],
             'address'=> $request['address'],
             'quantity'=> $request['quantity'],

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('package_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->date('travel_date');
-            $table->string('email');
             $table->string('phone', 20);
             $table->string('address');
             $table->integer('quantity');

@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
+        User::factory(5)->create();
 
         // User::factory()->create([
         //     'name' => 'Test User',
@@ -27,11 +27,11 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
         $this->call(MoonshineSeeder::class);
 
-        Package::factory(10)
+        Package::factory(50)
         ->has(Item::factory()->count(5))
         ->has(Offer::factory()->count(1))
         ->create();
 
-        Booking::factory(10)->create();
+        Booking::factory(30)->create();
     }
 }

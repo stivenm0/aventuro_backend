@@ -25,7 +25,6 @@ class BookingStoreRequest extends FormRequest
             'package_id' => ['required', 'integer', 'exists:packages,id'],
             'travel_date' => ['required', 'date', 'after_or_equal:today', 'before_or_equal:+1 year'],
             'quantity' => ['required', 'integer', 'max:50', 'min:1'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255',],
             'phone' => ['required', 'string', 'max:15', 'min:10'],
             'address' => ['required', 'string', 'max:255'],
         ];
