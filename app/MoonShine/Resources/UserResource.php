@@ -19,6 +19,7 @@ use MoonShine\Fields\Phone;
 use MoonShine\Fields\Preview;
 use MoonShine\Fields\Relationships\HasMany;
 use MoonShine\Fields\Text;
+use MoonShine\Handlers\ExportHandler;
 
 /**
  * @extends ModelResource<User>
@@ -38,11 +39,11 @@ class UserResource extends ModelResource
     {
         return [
             Block::make([
-                ID::make()->sortable(),
-                Text::make('Name'),
-                Email::make('Email'),
-                Phone::make('Phone')->hideOnIndex(),
-                Text::make('Address')->hideOnIndex(),
+                ID::make()->sortable()->showOnExport(),
+                Text::make('Name')->showOnExport(),
+                Email::make('Email')->showOnExport(),
+                Phone::make('Phone')->hideOnIndex()->showOnExport(),
+                Text::make('Address')->hideOnIndex()->showOnExport(),
                 HasMany::make('Bookings', 'bookings', resource: new BookingResource())
                 ->onlyLink(condition: fn()=> $this->isNowOnIndex())
             ]),

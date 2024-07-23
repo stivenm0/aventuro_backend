@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use App\Policies\MoonshineUserPolicy;
 use App\Policies\MoonshineUserRolePolicy;
+use Dedoc\Scramble\Scramble;
+use Dedoc\Scramble\Support\Generator\OpenApi;
+use Dedoc\Scramble\Support\Generator\SecurityScheme;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Gate;
@@ -35,5 +38,11 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(MoonshineUserRole::class, MoonshineUserRolePolicy::class);
 
         JsonResource::wrap('list');
+
+        Scramble::afterOpenApiGenerated(function (OpenApi $openApi) {
+            $openApi->secure(
+                SecurityScheme::http('bearer')
+            );
+        });
     }
 }

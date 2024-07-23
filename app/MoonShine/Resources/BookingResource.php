@@ -14,6 +14,8 @@ use MoonShine\Components\MoonShineComponent;
 use MoonShine\Fields\Date;
 use MoonShine\Fields\Number;
 use MoonShine\Fields\Relationships\BelongsTo;
+use MoonShine\Fields\Select;
+use MoonShine\Fields\Text;
 
 /**
  * @extends ModelResource<Booking>
@@ -26,6 +28,8 @@ class BookingResource extends ModelResource
 
     protected array $with = ['user', 'package'];
 
+    protected bool $editInModal = true; 
+
     /**
      * @return list<MoonShineComponent|Field>
      */
@@ -33,19 +37,46 @@ class BookingResource extends ModelResource
     {
         return [
             Block::make([
-                ID::make()->sortable(),
-                BelongsTo::make('User', 'user', resource: new UserResource()),
-                BelongsTo::make('Package', 'package', resource: new PackageResource()),
-                Date::make('Travel Date', 'travel_date')->format('d/m/y')->sortable(),
-                Number::make('Quantity'),
-                Number::make('Total'),
+                ID::make()->sortable()->showOnExport(),
+                BelongsTo::make('User', 'user', resource: new UserResource())->showOnExport(),
+                BelongsTo::make('Package', 'package', resource: new PackageResource())->showOnExport(),
+                Text::make('Status')->badge(function ($value) { 
+                    return match($value){
+                        'Pending'=> 'yellow',
+                        'Payed'=> 'green',
+                        'Cancelled'=> 'red'
+                    };
+                })->showOnExport(),
+                Date::make('Travel Date', 'travel_date')->format('d/m/y')->sortable()->showOnExport(),
+                Number::make('Quantity')->showOnExport(),
+                Number::make('Total')->showOnExport(),
             ]),
         ];
     }
 
+    public function formFields(): array 
+    {
+        return [
+            ID::make(),
+            Select::make('Status', 'status')
+            ->options([
+                'Pending' => 'Pending',
+                'Cancelled' => 'Cancelled',
+                'Payed' => 'Payed'
+            ]) ,
+            Date::make('Travel Date', 'travel_date'),
+        ];
+    } 
+
+
+    public function redirectAfterSave(): string
+    {
+        return $this->url();
+    }
+
     public function getActiveActions(): array 
     {
-        return ['view', 'update'];
+        return ['view', 'update', 'create'];
     } 
 
     public function search(): array
@@ -66,6 +97,8 @@ class BookingResource extends ModelResource
      */
     public function rules(Model $item): array
     {
-        return [];
+        return [
+            'status' => ['required', 'in:Pending,Cancelled,Payed'],
+        ];
     }
 }

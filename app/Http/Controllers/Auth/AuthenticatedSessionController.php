@@ -14,6 +14,9 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
+    /**
+     * @unauthenticated
+     */
     public function store(LoginRequest $request)
     {
         if (! $token = auth()->attempt($request->only(['email', 'password']))) {

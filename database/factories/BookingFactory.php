@@ -19,14 +19,23 @@ class BookingFactory extends Factory
     public function definition(): array
     {
 
+        $package =  Package::inRandomOrder()->first();
+        $quantity = fake()->numberBetween(1, 30);
+
+        $status = [
+            'Pending',
+            'Cancelled',
+            'Payed',
+        ];
         return [
             'user_id' => User::inRandomOrder()->pluck('id')->first(),
-            'package_id' => Package::inRandomOrder()->pluck('id')->first(),
-            'travel_date' => now()->addMonth(),
+            'package_id' => $package->id,
+            'travel_date' => now()->addMonth()->addDays(rand(1, 28)),
             'phone' => fake()->phoneNumber(),
             'address' => fake()->address(),
-            'quantity' => fake()->numberBetween(1, 30),
-            'total' => fake()->randomFloat(2, 1000, 1000)
+            'status' => $status[rand(0,2)],
+            'quantity' => $quantity,
+            'total' => $package->price * $quantity
         ];
     }
 }

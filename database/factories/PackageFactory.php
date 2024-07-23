@@ -35,9 +35,8 @@ class PackageFactory extends Factory
             'title' => fake()->sentence(2),
             'description' => fake()->paragraph(),
             'slug' => fake()->unique()->slug(),
-            // 'image' => fake()->imageUrl(640, 480, 'travel', true),
             'image' => $images[random_int(0,8)],
-            'price' => fake()->randomFloat(2, 100, 10000),
+            'price' => fake()->randomFloat(2, 2000, 20000),
             'destination' => fake()->country(). ' ' .fake()->city(),
             'duration' => fake()->numberBetween(1, 30),
         ];

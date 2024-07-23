@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Booking;
 use App\MoonShine\Controllers\ExamController;
 use App\MoonShine\Pages\exam;
 use App\MoonShine\Resources\BookingResource;
@@ -23,6 +24,7 @@ use MoonShine\Menu\MenuElement;
 use MoonShine\Pages\Page;
 use Closure;
 use Illuminate\Http\Request;
+use MoonShine\Resources\ModelResource;
 
 class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
 {
@@ -34,6 +36,13 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
         return [
             new ItemResource()
         ];
+    }
+
+    public function boot(): void
+    {
+        parent::boot();
+ 
+        // ModelResource::defaultExportToExcel(); 
     }
 
     /**
@@ -82,7 +91,8 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                 ->icon('heroicons.outline.ticket'),
 
                 MenuItem::make('Bookings', new BookingResource())
-                ->icon('heroicons.outline.banknotes'),
+                ->icon('heroicons.outline.banknotes')
+                ->badge(fn()=>Booking::where('status', 'Pending')->count()),
 
             ])->icon('heroicons.outline.paper-airplane'),
         ];

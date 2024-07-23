@@ -9,6 +9,7 @@ use App\Models\Booking;
 use App\Models\Package;
 use Illuminate\Http\Request;
 
+
 class BookingController extends Controller
 {
     /**
@@ -18,7 +19,7 @@ class BookingController extends Controller
     {
         $bookings = $request->user()->bookings()
         ->with('package:id,title,slug')
-        ->orderBy('id', 'desc')->paginate(2);
+        ->orderBy('id', 'desc')->paginate(9);
 
         return BookingResource::collection($bookings);
     }

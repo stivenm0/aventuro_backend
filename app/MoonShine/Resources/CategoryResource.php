@@ -39,9 +39,9 @@ class CategoryResource extends ModelResource
     {
             return [
             Block::make([
-                ID::make()->sortable(),
-                Text::make('Name'),
-                Text::make('Description'),
+                ID::make()->sortable()->showOnExport(),
+                Text::make('Name')->showOnExport(),
+                Text::make('Description')->showOnExport(),
             ]),
         ];
     }

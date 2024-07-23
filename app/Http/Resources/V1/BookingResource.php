@@ -18,6 +18,7 @@ class BookingResource extends JsonResource
         return [
             'id' => $this->id,
             'package' => $this->package,
+            'status' => $this->status,
             'quantity' => $this->quantity,
             'total' => $this->total,
             'travel_date' => Carbon::parse($this->travel_date)->isoFormat('dddd, D [de] MMMM [de] YYYY'),

@@ -40,8 +40,6 @@ class MoonShineUserResource extends ModelResource
 
     public function fields(): array
     {
-        // dd(moonshineRequest()->user()->isSuperUser());
-
         return [
             Block::make([
                 Tabs::make([
@@ -61,11 +59,11 @@ class MoonShineUserResource extends ModelResource
                             ->required()
                             ->showOnExport(),
 
-                        Image::make(__('moonshine::ui.resource.avatar'), 'avatar')
-                            ->showOnExport()
-                            ->disk(config('moonshine.disk', 'public'))
-                            ->dir('moonshine_users')
-                            ->allowedExtensions(['jpg', 'png', 'jpeg', 'gif']),
+                        // Image::make(__('moonshine::ui.resource.avatar'), 'avatar')
+                        //     ->showOnExport()
+                        //     ->disk(config('moonshine.disk', 'public'))
+                        //     ->dir('moonshine_users')
+                        //     ->allowedExtensions(['jpg', 'png', 'jpeg', 'gif']),
 
                         Date::make(__('moonshine::ui.resource.created_at'), 'created_at')
                             ->format("d.m.Y")

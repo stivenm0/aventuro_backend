@@ -40,6 +40,7 @@ class PackageResource extends ModelResource
 
     protected array $with = ['category'];
 
+    
 
 
     /**
@@ -50,26 +51,28 @@ class PackageResource extends ModelResource
         return [
             Grid::make([
                 Column::make([
-                    ID::make()->sortable(),
-                    BelongsTo::make('Category', 'category', resource: new CategoryResource())->badge('primary'),
+                    ID::make()->sortable()->showOnExport(),
+                    BelongsTo::make('Category', 'category', resource: new CategoryResource())
+                    ->badge('primary')
+                    ->showOnExport(),
                     Image::make('Image')->disk('packages'),
                     Slug::make('Slug')->from('Title')->unique(),
-                    Text::make('Destination'),
+                    Text::make('Destination')->showOnExport(),
                 ])->columnSpan(6), 
     
                 Column::make([ 
-                    Text::make('Title'),
-                    Number::make('Duration')->min(5)->max(31)->buttons(),
-                    Number::make('Price'),                    
+                    Text::make('Title')->showOnExport(),
+                    Number::make('Duration')->min(5)->max(31)->buttons()->showOnExport(),
+                    Number::make('Price')->showOnExport(),                    
                 ])->columnSpan(6)
             ]),
             Block::make([
-                TinyMce::make('Description'),
+                TinyMce::make('Description')->showOnExport(),
             ]),
                 HasMany::make('Items', 'items', resource: new ItemResource())->creatable()->fields([
                 Text::make('Name'),
             ]),
-            HasOne::make('Offer', 'offer', resource: new OfferResource())
+            HasOne::make('Offer', 'offer', resource: new OfferResource())->showOnExport()
 
         ];
     }
@@ -78,7 +81,7 @@ class PackageResource extends ModelResource
     public function indexFields(): array 
     {
         return [
-            ID::make()->sortable(),
+                ID::make()->sortable(),
                 BelongsTo::make('Category', 'category', resource: new CategoryResource())->badge('primary'),
                 Text::make('Title'),
                 Text::make('Destination'),
@@ -95,7 +98,10 @@ class PackageResource extends ModelResource
     {
         return parent::query()
             ->withCount('items')
-            ->withCount('offer');
+            ->withCount(['offer' => function ($query) {
+                $query->where('start_date','<', now())
+                      ->where('end_date', '>', now());
+                    }]);
     } 
 
     public function redirectAfterSave(): string

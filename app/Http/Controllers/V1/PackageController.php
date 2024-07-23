@@ -13,14 +13,21 @@ class PackageController extends Controller
     /**
      * Display a listing of the resource.
      */
+    /**
+     * @unauthenticated
+     */
     public function index(Request $request)
     {
         $filter = new PackageFilter();
         $queryItems = $filter->transform($request);
+        // return $request->query('q');
 
-         $packages =Package::with(['offer', 'category'])
+        $packages = Package::with(['offer', 'category'])
         ->where($queryItems)
-        ->paginate(2)
+        ->whereAny([
+            'title', 'destination'
+        ], 'LIKE', '%'.$request->query('q').'%')
+        ->paginate(9)
         ->appends($request->query());
         
         return PackageResource::collection($packages);
@@ -36,6 +43,9 @@ class PackageController extends Controller
 
     /**
      * Display the specified resource.
+     */
+    /**
+     * @unauthenticated
      */
     public function show(string $slug)
     {

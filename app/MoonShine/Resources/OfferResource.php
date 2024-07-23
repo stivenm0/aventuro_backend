@@ -35,12 +35,12 @@ class OfferResource extends ModelResource
     {
         return [
             Block::make([
-                ID::make()->sortable(),
-                BelongsTo::make('Package', 'package', resource: new PackageResource())->searchable(),
-                Number::make('Discount')->min(5)->max(100),
+                ID::make()->sortable()->showOnExport(),
+                BelongsTo::make('Package', 'package', resource: new PackageResource())->searchable()->showOnExport(),
+                Number::make('Discount', formatted: fn($item)=> $item->discount . ' %')->min(5)->max(100)->showOnExport(),
                 DateRange::make('Date')
                 ->fromTo('start_date','end_date')
-                ->format('d/m/Y') 
+                ->format('d/m/Y')->showOnExport()
             ]),
         ];
     }

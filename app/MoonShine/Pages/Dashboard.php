@@ -45,31 +45,46 @@ class Dashboard extends Page
                     ValueMetric::make('Users')
                         ->value(User::count())
                         ->icon('heroicons.user-group')
-                        ->columnSpan(2),
+                        ->columnSpan(3),
 
                 
                     ValueMetric::make('Packages')
                         ->value(Package::count()) 
                         ->icon('heroicons.bars-4')
-                        ->columnSpan(2),
+                        ->columnSpan(3),
 
                 
                     ValueMetric::make('Offers')
                         ->value(Offer::count())
                         ->icon('heroicons.ticket')
-                        ->columnSpan(2),
+                        ->columnSpan(3),
             
                 
                     ValueMetric::make('Bookings')
                         ->value(Booking::count())
                         ->icon('heroicons.banknotes')
-                        ->columnSpan(2),
+                        ->columnSpan(3),
+
+                    ValueMetric::make('Pending Bookings')
+                        ->value(Booking::where('status', 'Pending')->count())
+                        ->icon('heroicons.hand-raised')
+                        ->columnSpan(3),
+
+                    ValueMetric::make('Cancelled Bookings')
+                        ->value(Booking::where('status', 'Cancelled')->count())
+                        ->icon('heroicons.no-symbol')
+                        ->columnSpan(3),
+
+                    ValueMetric::make('Payed Bookings')
+                        ->value(Booking::where('status', 'Payed')->count())
+                        ->icon('heroicons.banknotes')
+                        ->columnSpan(3),
 
                 
                     ValueMetric::make('Categories')
                         ->value(Category::count())
                         ->icon('heroicons.tag')
-                        ->columnSpan(2)
+                        ->columnSpan(3)
                 
             ])
                 
