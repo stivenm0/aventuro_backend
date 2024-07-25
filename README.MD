@@ -5,7 +5,7 @@ The Aventuro API provides functionalities for users to explore travel packages, 
 ## Frontend:
 ### [Frontend Repository](https://github.com/stivenm0/aventuro_frontend.git)
 
-Video: [Watch Video](https://youtu.be/8wZqrtXeqaA)
+Video: [Watch Video](https://youtu.be/gSUW1SWNJuk?si=VmcKAuGltvgrbWJW)
 
 ## Content
 
