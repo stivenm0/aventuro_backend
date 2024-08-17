@@ -70,12 +70,17 @@ Here is how you can run the project locally:
     php artisan key:generate
     ```
 
-8. Run migrations
+8. Generate the jwt key
+    ```sh
+    php artisan jwt:secret
+    ```
+
+9. Run migrations
     ```sh
     php artisan migrate
     ```
 
-9. Run seeders
+10. Run seeders
     ```sh
     php artisan db:seed
     ```
