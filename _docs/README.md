@@ -34,6 +34,7 @@ composer install
 php artisan jwt:secret
 php artisan launch:install
 php artisan storage:link
+php artisan boost:install
 ```
 
 #### 📂 **Backend Routes**

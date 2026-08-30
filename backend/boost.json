@@ -1,0 +1,15 @@
+{
+    "agents": [
+        "opencode"
+    ],
+    "cloud": false,
+    "guidelines": true,
+    "mcp": true,
+    "nightwatch": false,
+    "sail": true,
+    "skills": [
+        "infer-conventions",
+        "laravel-best-practices",
+        "testing-best-practices"
+    ]
+}

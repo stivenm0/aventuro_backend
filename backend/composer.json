@@ -24,6 +24,7 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
+        "laravel/boost": "^2.7",
         "laravel/breeze": "^2.1",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.44",
