@@ -3,7 +3,7 @@
 use App\Models\User;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken; // ponytail: L13 renames to PreventRequestForgery (alias keeps this working)
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
@@ -46,7 +46,7 @@ return [
         StartSession::class,
         AuthenticateSession::class,
         ShareErrorsFromSession::class,
-        VerifyCsrfToken::class,
+        VerifyCsrfToken::class, // TODO L13: replace with PreventRequestForgery::class
         SubstituteBindings::class,
         ChangeLocale::class,
     ],

@@ -102,6 +102,19 @@ return [
     |
     */
 
-    'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_cache_'),
+    'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel')).'-cache-'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Serializable Classes
+    |--------------------------------------------------------------------------
+    |
+    | This option defines the classes that are allowed to be unserialized
+    | when retrieving cached values. By default, no classes are allowed
+    | to help prevent deserialization attacks if APP_KEY is leaked.
+    |
+    */
+
+    'serializable_classes' => false,
 
 ];
