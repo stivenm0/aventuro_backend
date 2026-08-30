@@ -11,8 +11,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.11",
-    "axios": "^1.7.2",
+    "@tailwindcss/vite": "^4.3.3",
+    "axios": "^1.20.0",
     "daisyui": "^5.0.46",
     "pinia": "^2.1.7",
     "vue": "^3.5.13",
@@ -20,14 +20,14 @@
     "vue-toastification": "^2.0.0-rc.5"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.11",
+    "@tailwindcss/postcss": "^4.3.3",
     "@vitejs/plugin-vue": "^5.2.1",
     "autoprefixer": "^10.4.19",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.23.0",
-    "postcss": "^8.5.6",
+    "postcss": "^8.5.26",
     "prettier": "^3.2.5",
-    "tailwindcss": "^4.1.11",
-    "vite": "^6.0.5"
+    "tailwindcss": "^4.3.3",
+    "vite": "^6.4.3"
   }
 }
